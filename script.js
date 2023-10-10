@@ -1,37 +1,41 @@
 
-const eventos = {
-  Zone7: {
-    nombre: "Zone7",
+const eventos = [
+  {
+    nombre: "ZONE 7",
     fecha: "15 de octubre de 2023",
+    lugar: 'Crobar, Buenos Aires',
     precio: 2000,
     entradas: 200,
   },
-  TitaLau: {
-    nombre: "TitaLau",
+  {
+    nombre: "TITA LAU",
     fecha: "20 de noviembre de 2023",
+    lugar: 'Luna club, Ibiza',
     precio: 60000,
     entradas: 1500,
   },
-  Wade: {
-    nombre: "Wade",
+  {
+    nombre: "WADE",
     fecha: "5 de diciembre de 2023",
+    lugar: 'Criterio, Málaga',
     precio: 45000,
     entradas: 2450,
   },
-  Adricted: {
-    nombre: "Adricted",
+  {
+    nombre: "ADRICTED",
     fecha: "31 de diciembre de 2023",
+    lugar: 'Ciclo isis, Buenos Aires',
     precio: 40000,
     entradas: 1000,
   },
-};
+];
 
 function mostrarEventos() {
   let listaEventos = "Eventos disponibles:\n";
   let i = 1;
 
   for (let evento in eventos) {
-    listaEventos += `${i}. ${eventos[evento].nombre} (${eventos[evento].fecha})\n`;
+    listaEventos += `${i}:  \n ${eventos[evento].nombre} \n ${eventos[evento].lugar} (${eventos[evento].fecha})\n ----------------------\n `;
     i++;
   }
 
@@ -60,7 +64,7 @@ function comprarEntradas(evento) {
           break;
       }
 
-      alert(`¡Compra confirmada!\nEvento: ${evento.nombre}\nFecha: ${evento.fecha}\nPrecio: ${evento.precio}\nCantidad de Entradas: ${cantidadEntradas}\nTotal: $${total}\nMétodo de Pago: ${mensajeMetodoPago}\n¡Gracias por tu compra!`);
+      alert(`¡Su compra ha sido confirmada!\nEvento: ${evento.nombre}\nFecha: ${evento.fecha}\nPrecio: ${evento.precio}\nCantidad de Entradas: ${cantidadEntradas}\nTotal: $${total}\nMétodo de Pago: ${mensajeMetodoPago}\n¡Gracias por tu compra!`);
     } else {
       alert("Método de pago no válido. Por favor, selecciona un método de pago válido.");
     }
