@@ -32,6 +32,8 @@ const eventos = [
         entradas: 1000,
     },
 ];
+
+
 function mostrarEventos() {
     let listaEventos = "Eventos disponibles:\n";
     let i = 1;
@@ -49,6 +51,27 @@ function mostrarEventos() {
     eventosDOM.innerHTML = listaEventos;
 }
 
+function misTickets() {
+
+    let ticketComprado = JSON.parse(localStorage.getItem('ticketVendido'));
+    const ticket = document.getElementById("ticketComprados");
+    ticket.innerHTML =
+        `
+        <section id="compraTicketContainer">
+        <div class="miTicket">
+     <h3 id="titulo"> Tickets comprados </3>
+     <p id="descripcion"> Evento: ${ticketComprado.nombre} </p>
+     <p id="descripcion"> Ubicación: ${ticketComprado.lugar} </p>
+     <p id="descripcion">  Fecha: ${ticketComprado.fecha} </p>
+
+     </div>
+     </section>`
+};
+
+
+
+
+
 function mostrarForm() {
     const ticketsDom = document.getElementById("tickets");
 
@@ -56,7 +79,7 @@ function mostrarForm() {
     let formHTML = `
     <div class="formulario"> 
     <label class="text" for="">Selecciona el evento</label>
-    <input class="input" type="number" placeholder="" id="seleccionarEvento">
+    <input class="input" type="number" placeholder="Ej: '2' " id="seleccionarEvento">
 
     <label class="text"for="">Selecciona la cantidad de entradas</label>
     <input class="input" type="number" placeholder="Cantidad de entradas" id="cantidadEntradas">
@@ -64,14 +87,14 @@ function mostrarForm() {
     <label class="text" for="pago">Selecciona el método de pago:\n1. Efectivo\n2. Crédito\n3. Débito</label>
     <input class="input" type="number" placeholder="Metodo de pago: 1" id="metodoPago"> 
 
-    <button class="input"type="submit">Enviar</button>
+    <button class="btnEnviar" type="submit">Enviar</button>
     </div>`
     ticketsDom.innerHTML = formHTML;
 }
 
 mostrarEventos()
 mostrarForm()
-
+misTickets()
 let tickets = document.getElementById("tickets");
 tickets.addEventListener("submit", enviarForm);
 
@@ -100,36 +123,33 @@ function enviarForm(e) {
             break;
     }
 
-    let eventoEncontrado = eventos.find((evento) => { return inputEventoId == evento.id })
 
-    console.log(eventoEncontrado)
+
+    let eventoEncontrado = eventos.find((evento) => { return inputEventoId == evento.id })
 
 
     let mensajeMetodoPago = ""
     switch (inputMetodoPago) {
         case "1":
-            mensajeMetodoPago = "Efectivo";
+            mensajeMetodoPago = `<p>Efectivo</p>`;
             break;
         case "2":
-            mensajeMetodoPago = "Crédito";
+            mensajeMetodoPago = `<p>Crédito</p>`;
             break;
         case "3":
-            mensajeMetodoPago = "Débito";
+            mensajeMetodoPago = `<p>Débito</p>`;
             break;
     }
 
     let venta = document.getElementById("venta");
 
-
     venta.innerHTML = `
-<div class="ventaContainer">
-
-    <p>¡Su compra para ${eventoSeleccionado}  ha sido confirmada!  \nMétodo de Pago: ${mensajeMetodoPago}\n¡Gracias por tu compra! 
+    <div class="ventaContainer">
+    <p>¡Su compra para ${eventoEncontrado.nombre}  ha sido confirmada!</p> <p> \nMétodo de Pago: ${mensajeMetodoPago}\n¡Gracias por tu compra! 
     
     </p>
-    <button class="btnComprar" onclick="otraVenta(event)">Compar otro ticket</button>
-    </div>`
-        ;
+    <button class="btnOpcion" onclick="otraVenta(event)">Compar otro ticket </button>
+    </div>`;
 
     const eventosDOM = document.getElementById("eventoSeleccionado");
     eventosDOM.innerHTML = "";
@@ -137,9 +157,13 @@ function enviarForm(e) {
 
     let ticketVendido = {
         "nombre": eventoSeleccionado,
-        "metodoPago": mensajeMetodoPago
+        "metodoPago": mensajeMetodoPago,
+        "lugar": eventoEncontrado.lugar,
+        "fecha": eventoEncontrado.fecha
     }
-    localStorage.setItem('ticketVendido', ticketVendido);
+
+    localStorage.setItem('ticketVendido', JSON.stringify(ticketVendido));
+    misTickets()
 }
 
 function otraVenta(e) {
@@ -148,3 +172,7 @@ function otraVenta(e) {
     mostrarEventos()
     mostrarForm()
 }
+
+
+
+

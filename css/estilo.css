@@ -17,6 +17,13 @@ body {
 
 }
 
+.input {
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    border-color: purple;
+}
+
 .container {
     width: 100%;
     height: 100vh;
@@ -47,34 +54,70 @@ body {
     align-items: center;
     flex-direction: column;
 }
+#compraTicketContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.miTicket {
+padding: 25px;
+border-radius: 5px;
+    background-color: beige;
+    box-shadow: 0 0 2px 0  rgb(24, 23, 23);
+    width: max-content;
+}
 
-.input {
+#titulo {
+    text-transform: uppercase;
+    color: rgb(24, 23, 23);
+}
+
+#descripcion {
+    margin-top: 10px;
+    color: rgba(20, 19, 19, 0.678);
+    font-size: 15px;
+}
+
+.btnEnviar {
     border-radius: 5px;
     padding: 8px;
     width: max-content;
     font-size: 10px;
-    background-color: transparent;
+    margin-top: 10px;
+    border: none;
+    margin-bottom: 20px;
+    color: white;
+    background-color: rgb(136, 74, 136);
+
 }
+
 .textContainer {
     gap: 10px;
-    display:flex;
+    display: flex;
     justify-content: center;
     font-weight: bold;
 }
+
 .eventosLista {
     font-weight: bold;
 }
+
 .text {
     font-size: 1rem;
     padding: 8px;
     font-weight: bold;
 }
-.btnComprar {
-    font-weight: bold;
-    font-size: 10px;
-    padding: 5px;
+
+.btnOpcion {
     border-radius: 5px;
-    font-weight: bold;
+    padding: 8px;
+    width: max-content;
+    font-size: 15px;
+    margin-top: 10px;
+    border: none;
+    margin-bottom: 20px;
+    color: white;
+    background-color: rgb(136, 74, 136);
 }
 
 .background {
