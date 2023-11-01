@@ -29,29 +29,75 @@ body {
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-top: 50px;
 }
 
-@keyframes colorChange {
-    0% {
-        color: black;
-        font-size: 24px;
-    }
+.containerVentas {
+    padding: 20px;
+    border-left: 2px solid rgba(53, 53, 53, 0.829);
+}
 
-    50% {
-        color: violet;
-        font-size: 30px;
-    }
 
-    100% {
-        color: black;
-        font-size: 24px;
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.background {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.918);
+    box-shadow: 0px 0px 15px rgba(128, 0, 128, 0.705);
+    color: rgba(128, 0, 128, 0.705);
+    padding: 20px;
+    border-radius: 10px;
+    height: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+}
+.eventosDisponibles {
+    color: rgb(44, 44, 44);
+    text-align: start;
+    padding: 20px;
+}
+.eventos {
+    color: black;
+    font-size: 15px;
+    margin-top: 10px;
+
+}
+.tituloEP {
+    color: rgb(128, 68, 128);
+    font-size: 15px;
+}
+
+
+.background h2 {
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+}
+
+.background span {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
 }
 
 .formulario {
+    margin-top: 20px;
     display: flex;
-    align-items: center;
     flex-direction: column;
 }
 #compraTicketContainer {
@@ -60,14 +106,15 @@ body {
     justify-content: center;
 }
 .miTicket {
-padding: 25px;
+padding: 20px;
 border-radius: 5px;
-    background-color: beige;
-    box-shadow: 0 0 2px 0  rgb(24, 23, 23);
+    background-color: #fff;
+    box-shadow: 0 0 5px 0  rgb(24, 23, 23);
     width: max-content;
 }
 
 #titulo {
+    font-size: 12px;
     text-transform: uppercase;
     color: rgb(24, 23, 23);
 }
@@ -75,34 +122,38 @@ border-radius: 5px;
 #descripcion {
     margin-top: 10px;
     color: rgba(20, 19, 19, 0.678);
-    font-size: 15px;
+    font-size: 10px;
 }
 
 .btnEnviar {
     border-radius: 5px;
-    padding: 8px;
+    padding: 10px;
     width: max-content;
-    font-size: 10px;
+    font-size: 12px;
     margin-top: 10px;
     border: none;
     margin-bottom: 20px;
     color: white;
+    font-weight: bold;
     background-color: rgb(136, 74, 136);
 
 }
 
 .textContainer {
-    gap: 10px;
+    gap: 8px;
     display: flex;
-    justify-content: center;
     font-weight: bold;
-}
 
+}
+#eventoSeleccionado {
+    text-align: start;
+}
 .eventosLista {
     font-weight: bold;
 }
 
 .text {
+    color: rgb(128, 68, 128);
     font-size: 1rem;
     padding: 8px;
     font-weight: bold;
@@ -118,32 +169,4 @@ border-radius: 5px;
     margin-bottom: 20px;
     color: white;
     background-color: rgb(136, 74, 136);
-}
-
-.background {
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.918);
-    box-shadow: 0px 0px 15px rgba(128, 0, 128, 0.705);
-    color: rgba(128, 0, 128, 0.705);
-    padding: 20px;
-    border-radius: 10px;
-    width: 70%;
-    height: auto;
-    text-align: center;
-}
-
-.background:hover {
-    animation: fadeOut 2s ease-in-out;
-
-}
-
-.background h2 {
-    font-family: "Poppins", sans-serif;
-    font-size: 2rem;
-    text-transform: uppercase;
-}
-
-.background span {
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
 }

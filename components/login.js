@@ -35,13 +35,17 @@ const eventos = [
 
 
 function mostrarEventos() {
-    let listaEventos = "Eventos disponibles:\n";
+    let listaEventos = `<div class="eventosProximos">
+    <h2 class="tituloEP"> Próximos eventos</h2>
+    </div>`;
     let i = 1;
 
     for (let evento in eventos) {
         listaEventos += `
         <div class="textContainer">
-        <p> ${eventos[evento].id}: ${eventos[evento].nombre} - ${eventos[evento].lugar} - (${eventos[evento].fecha})</p> 
+        <span class="eventos">${eventos[evento].id}-</span>
+        <span class="eventos">${eventos[evento].nombre}</span> 
+        <span class="eventos"> ${eventos[evento].lugar}  (${eventos[evento].fecha})</span>
         </div>
         `;
         i++;
@@ -57,8 +61,8 @@ function misTickets() {
     const ticket = document.getElementById("ticketComprados");
     ticket.innerHTML =
         `
-        <section id="compraTicketContainer">
-        <div class="miTicket">
+    <section id="compraTicketContainer">
+    <div class="miTicket">
      <h3 id="titulo"> Tickets comprados </3>
      <p id="descripcion"> Evento: ${ticketComprado.nombre} </p>
      <p id="descripcion"> Ubicación: ${ticketComprado.lugar} </p>
@@ -67,10 +71,6 @@ function misTickets() {
      </div>
      </section>`
 };
-
-
-
-
 
 function mostrarForm() {
     const ticketsDom = document.getElementById("tickets");
@@ -166,13 +166,14 @@ function enviarForm(e) {
     misTickets()
 }
 
+
 function otraVenta(e) {
     let venta = document.getElementById("venta");
     venta.innerHTML = ""
-    mostrarEventos()
     mostrarForm()
-}
+    mostrarEventos()
 
+}
 
 
 
