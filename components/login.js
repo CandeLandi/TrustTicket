@@ -1,4 +1,4 @@
-const eventos = [
+let eventos = [
     {
         id: "1",
         nombre: "ZONE 7",
@@ -34,42 +34,62 @@ const eventos = [
 ];
 
 
+
 function mostrarEventos() {
     let listaEventos = `<div class="eventosProximos">
     <h2 class="tituloEP"> Próximos eventos</h2>
     </div>`;
     let i = 1;
-
-    for (let evento in eventos) {
+    
+    for (let index = 0; index < 4; index++) {
+        const evento = eventos[index];
         listaEventos += `
+        <div class="comprarContainer">
         <div class="textContainer">
-        <span class="eventos">${eventos[evento].id}-</span>
-        <span class="eventos">${eventos[evento].nombre}</span> 
-        <span class="eventos"> ${eventos[evento].lugar}  (${eventos[evento].fecha})</span>
+        <span >${evento.name}</span>
+        <span class="fechaEvento">${evento.dates.start.localDate}</span>
+        </div>
+        <div class="btnComprarContainer">
+        <button class="btnComprar" onclick="enviarForm(event,'${evento.id}')"> Comprar <button>
+        </div>
         </div>
         `;
-        i++;
     }
 
+    /* <span class="eventos">${eventos[evento].id}-</span> */
+    /* <span class="eventos"> ${eventos[evento].lugar}  (${eventos[evento].fecha})</span> */
     const eventosDOM = document.getElementById("eventoSeleccionado");
     eventosDOM.innerHTML = listaEventos;
 }
 
+
+
 function misTickets() {
+    let ticketsComprado = []
 
-    let ticketComprado = JSON.parse(localStorage.getItem('ticketVendido'));
-    const ticket = document.getElementById("ticketComprados");
-    ticket.innerHTML =
-        `
-    <section id="compraTicketContainer">
-    <div class="miTicket">
-     <h3 id="titulo"> Tickets comprados </3>
-     <p id="descripcion"> Evento: ${ticketComprado.nombre} </p>
-     <p id="descripcion"> Ubicación: ${ticketComprado.lugar} </p>
-     <p id="descripcion">  Fecha: ${ticketComprado.fecha} </p>
+    ticketsComprado = JSON.parse(localStorage.getItem('ticketsVendido'));
 
-     </div>
-     </section>`
+    if (ticketsComprado) {
+        const ticket = document.getElementById("ticketComprados");
+        ticketsComprado.forEach(ticketC => {
+            ticket.innerHTML +=
+                `
+        <div class="miTicket">
+         <h3 id="titulo"> Mi ticket </3>
+         <p id="descripcion"> Evento: ${ticketC.name} </p>
+         <p id="descripcion"> Ubicación: ${ticketC.lugar} </p>
+         <p id="descripcion">  Fecha: ${ticketC.fecha} </p>
+         </div>
+    `
+        });
+    }
+
+
+    console.log(ticketsComprado)
+
+
+
+
 };
 
 function mostrarForm() {
@@ -78,8 +98,6 @@ function mostrarForm() {
 
     let formHTML = `
     <div class="formulario"> 
-    <label class="text" for="">Selecciona el evento</label>
-    <input class="input" type="number" placeholder="Ej: '2' " id="seleccionarEvento">
 
     <label class="text"for="">Selecciona la cantidad de entradas</label>
     <input class="input" type="number" placeholder="Cantidad de entradas" id="cantidadEntradas">
@@ -87,47 +105,33 @@ function mostrarForm() {
     <label class="text" for="pago">Selecciona el método de pago:\n1. Efectivo\n2. Crédito\n3. Débito</label>
     <input class="input" type="number" placeholder="Metodo de pago: 1" id="metodoPago"> 
 
-    <button class="btnEnviar" type="submit">Enviar</button>
+
     </div>`
     ticketsDom.innerHTML = formHTML;
 }
 
-mostrarEventos()
+
 mostrarForm()
 misTickets()
 let tickets = document.getElementById("tickets");
 tickets.addEventListener("submit", enviarForm);
 
-function enviarForm(e) {
+function enviarForm(e, evento) {
+    console.log(evento)
     e.preventDefault();
     /* Valores */
-    let inputEventoId = document.getElementById("seleccionarEvento").value;
+    let inputEventoId = evento;
     let inputMetodoPago = document.getElementById("metodoPago").value;
     let inputCantidadEntradas = document.getElementById("cantidadEntradas").value;
 
-    let eventoSeleccionado = ""
+  
     /* Logica */
 
-    switch (inputEventoId) {
-        case "1":
-            eventoSeleccionado = "ZONE";
-            break;
-        case "2":
-            eventoSeleccionado = "TITA LAU";
-            break;
-        case "3":
-            eventoSeleccionado = "WADE";
-            break;
-        case "4":
-            eventoSeleccionado = "ADRICTED";
-            break;
-    }
 
-
-
+/* Busca el evento con el ID que envio por parametro en la lista de evento para obtener toda la
+informacion del evento seleccionado */
     let eventoEncontrado = eventos.find((evento) => { return inputEventoId == evento.id })
-
-
+console.log(eventoEncontrado)
     let mensajeMetodoPago = ""
     switch (inputMetodoPago) {
         case "1":
@@ -145,26 +149,35 @@ function enviarForm(e) {
 
     venta.innerHTML = `
     <div class="ventaContainer">
-    <p>¡Su compra para ${eventoEncontrado.nombre}  ha sido confirmada!</p> <p> \nMétodo de Pago: ${mensajeMetodoPago}\n¡Gracias por tu compra! 
-    
+    <p>¡Su compra para ${eventoEncontrado.name}  ha sido confirmada!</p> <p> \nMétodo de Pago: ${mensajeMetodoPago}\n¡Gracias por tu compra! 
     </p>
     <button class="btnOpcion" onclick="otraVenta(event)">Compar otro ticket </button>
     </div>`;
 
-    const eventosDOM = document.getElementById("eventoSeleccionado");
-    eventosDOM.innerHTML = "";
     tickets.innerHTML = ""
 
     let ticketVendido = {
-        "nombre": eventoSeleccionado,
+        "name": eventoEncontrado.name,
         "metodoPago": mensajeMetodoPago,
-        "lugar": eventoEncontrado.lugar,
-        "fecha": eventoEncontrado.fecha
+        "lugar": eventoEncontrado._embedded.venues[0].city.name,
+        "fecha": eventoEncontrado.dates.start.localDate
     }
 
-    localStorage.setItem('ticketVendido', JSON.stringify(ticketVendido));
+    ticketsVendido = JSON.parse(localStorage.getItem('ticketsVendido'));
+    if (ticketsVendido) {
+        ticketsVendido.push(ticketVendido)
+    } else {
+        ticketsVendido = [];
+        ticketsVendido.push(ticketVendido);
+    }
+
+
+    localStorage.setItem('ticketsVendido', JSON.stringify(ticketsVendido));
     misTickets()
 }
+
+let ticketVendidos = [];
+
 
 
 function otraVenta(e) {
@@ -175,5 +188,25 @@ function otraVenta(e) {
 
 }
 
+
+
+const apiKey = 'https://app.ticketmaster.com/discovery/v2/events.json?apikey=YFxMTPPfGHgoat6nyq5tITBc7LESG7eO'
+
+const url = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey}`
+function obtenerEventos() {
+    fetch(apiKey)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al obtener los datos')
+            }
+
+            return response.json()
+        })
+        .then(data => {
+           eventos = data._embedded.events
+           mostrarEventos()
+        })
+}
+obtenerEventos()
 
 

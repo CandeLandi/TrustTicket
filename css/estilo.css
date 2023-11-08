@@ -10,6 +10,7 @@
 body {
     margin: 0;
     padding: 0;
+
     background-image: url('../img/fondo.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -29,34 +30,19 @@ body {
     height: 100vh;
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 150px;
 }
 
 .containerVentas {
     padding: 20px;
-    border-left: 2px solid rgba(53, 53, 53, 0.829);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.fechaEvento {
+    opacity: .7;
+}
 
 .background {
+    align-items: center;
     position: absolute;
     background-color: rgba(255, 255, 255, 0.918);
     box-shadow: 0px 0px 15px rgba(128, 0, 128, 0.705);
@@ -67,19 +53,68 @@ body {
     text-align: center;
     display: flex;
     flex-direction: row;
+    width: 50%;
 }
+
+.comprarContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    text-align: start;
+    align-items: center;
+}
+.textContainer {
+    width: 80%;
+    gap: 8px;
+    display: flex;
+    text-align: start;
+
+}
+.btnComprarContainer {
+    width: 20%;
+    justify-content: center;
+    display: flex;
+
+}
+.btnComprar {
+    border-radius: 5px;
+    padding: 12px;
+    width: max-content;
+    font-size: 12px;
+    margin-top: 20px;
+    border: none;
+    margin-bottom: 20px;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(136, 74, 136);
+
+}
+
+.btnComprar:hover {
+    box-shadow: 0 0 10px 0 rgb(136, 74, 136);
+    background-color: rgba(27, 27, 27, 0.918);
+    cursor: pointer;
+
+}
+
 .eventosDisponibles {
     color: rgb(44, 44, 44);
     text-align: start;
     padding: 20px;
+    border-right: 3px solid rgba(53, 53, 53, 0.829);
+    width: 80%;
 }
-.eventos {
-    color: black;
-    font-size: 15px;
-    margin-top: 10px;
 
+
+.ventaContainer {
+    text-align: end;
+    font-weight: bold;
+    color: black;
+    border-bottom: 2px solid rgba(53, 53, 53, 0.829);
 }
+
 .tituloEP {
+    margin-top: 15px;
     color: rgb(128, 68, 128);
     font-size: 15px;
 }
@@ -92,7 +127,7 @@ body {
 
 .background span {
     font-family: "Poppins", sans-serif;
-    font-weight: 500;
+    font-weight: bold;
 }
 
 .formulario {
@@ -100,21 +135,24 @@ body {
     display: flex;
     flex-direction: column;
 }
+
 #compraTicketContainer {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 .miTicket {
-padding: 20px;
-border-radius: 5px;
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 5px;
     background-color: #fff;
-    box-shadow: 0 0 5px 0  rgb(24, 23, 23);
+    box-shadow: 0 0 5px 0 rgb(24, 23, 23);
     width: max-content;
+    width: 250px
 }
 
 #titulo {
-    font-size: 12px;
+    font-size: 15px;
     text-transform: uppercase;
     color: rgb(24, 23, 23);
 }
@@ -127,10 +165,10 @@ border-radius: 5px;
 
 .btnEnviar {
     border-radius: 5px;
-    padding: 10px;
+    padding: 12px;
     width: max-content;
     font-size: 12px;
-    margin-top: 10px;
+    margin-top: 20px;
     border: none;
     margin-bottom: 20px;
     color: white;
@@ -139,15 +177,14 @@ border-radius: 5px;
 
 }
 
-.textContainer {
-    gap: 8px;
-    display: flex;
-    font-weight: bold;
+.btnEnviar:hover {
+    box-shadow: 0 0 10px 0 rgb(136, 74, 136);
+    background-color: rgba(27, 27, 27, 0.918);
+    cursor: pointer;
+}
 
-}
-#eventoSeleccionado {
-    text-align: start;
-}
+
+
 .eventosLista {
     font-weight: bold;
 }
@@ -169,4 +206,10 @@ border-radius: 5px;
     margin-bottom: 20px;
     color: white;
     background-color: rgb(136, 74, 136);
+}
+
+.btnOpcion:hover {
+    box-shadow: 0 0 10px 0 rgb(136, 74, 136);
+    background-color: rgba(27, 27, 27, 0.918);
+    cursor: pointer;
 }
