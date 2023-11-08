@@ -11,6 +11,7 @@ function mostrarEventos() {
         <div class="textContainer">
         <span >${evento.name}</span>
         <span class="fechaEvento">${evento.dates.start.localDate}</span>
+        <span class="fechaEvento">${evento.dates.start.localTime}</span>
         </div>
         <div class="btnComprarContainer">
         <button class="btnComprar" onclick="enviarForm(event,'${evento.id}')"> Comprar <button>
@@ -39,6 +40,7 @@ function misTickets() {
          <p id="descripcion"> Evento: ${ticketC.name} </p>
          <p id="descripcion"> Ubicación: ${ticketC.lugar} </p>
          <p id="descripcion">  Fecha: ${ticketC.fecha} </p>
+         <p id="descripcion">  Hora: ${ticketC.hora} </p>
          </div>
     `
         });
@@ -84,6 +86,8 @@ function enviarForm(e, evento) {
     informacion del evento seleccionado */
     let eventoEncontrado = eventos.find((evento) => { return inputEventoId == evento.id })
     let mensajeMetodoPago = ""
+    
+
     switch (inputMetodoPago) {
         case "1":
             mensajeMetodoPago = `<p>Efectivo</p>`;
@@ -111,7 +115,8 @@ function enviarForm(e, evento) {
         "name": eventoEncontrado.name,
         "metodoPago": mensajeMetodoPago,
         "lugar": eventoEncontrado._embedded.venues[0].city.name,
-        "fecha": eventoEncontrado.dates.start.localDate
+        "fecha": eventoEncontrado.dates.start.localDate,
+        "hora" : eventoEncontrado.dates.start.localTime
     }
 
     ticketsVendido = JSON.parse(localStorage.getItem('ticketsVendido'));
