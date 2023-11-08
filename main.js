@@ -1,3 +1,5 @@
+
+
 function mostrarEventos() {
     let listaEventos = `<div class="eventosProximos">
     <h2 class="tituloEP"> Próximos eventos</h2>
@@ -11,7 +13,6 @@ function mostrarEventos() {
         <div class="textContainer">
         <span >${evento.name}</span>
         <span class="fechaEvento">${evento.dates.start.localDate}</span>
-        <span class="fechaEvento">${evento.dates.start.localTime}</span>
         </div>
         <div class="btnComprarContainer">
         <button class="btnComprar" onclick="enviarForm(event,'${evento.id}')"> Comprar <button>
@@ -22,8 +23,6 @@ function mostrarEventos() {
     const eventosDOM = document.getElementById("eventoSeleccionado");
     eventosDOM.innerHTML = listaEventos;
 }
-
-
 
 function misTickets() {
     let ticketsComprado = []
@@ -53,6 +52,9 @@ function mostrarForm() {
 
     let formHTML = `
     <div class="formulario"> 
+
+    <label class="text"for="">Email</label>
+    <input class="input" type="email" placeholder="ejemplo@gmail.com" id="email">
 
     <label class="text"for="">Selecciona la cantidad de entradas</label>
     <input class="input" type="number" placeholder="Cantidad de entradas" id="cantidadEntradas">
@@ -130,6 +132,8 @@ function enviarForm(e, evento) {
 
     localStorage.setItem('ticketsVendido', JSON.stringify(ticketsVendido));
     misTickets()
+
+
 }
 
 let ticketVendidos = [];
@@ -140,8 +144,15 @@ function otraVenta(e) {
     let venta = document.getElementById("venta");
     venta.innerHTML = ""
     mostrarForm()
-    mostrarEventos()
 
+    Swal.fire({
+        title: "Compra realizada!",
+        text: "Te enviaremos un mail para efectuar el pago.",
+        confirmButtonColor: "rgb(128, 68, 128)",
+        icon: "success",
+        buttonBorderWidth: 0
+      });
+      mostrarEventos()
 }
 
 
